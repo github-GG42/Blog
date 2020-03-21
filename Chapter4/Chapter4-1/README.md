@@ -41,7 +41,26 @@
   gitbook serve --port 端口号
   ```
 
-  
+### 构建书籍
+
+```shell
+#构建书籍：默认：将生成的静态网站输出到 _book 目录
+gitbook build
+
+# 指定路径：
+gitbook build [书籍路径] [输出路径]
+
+#生成pdf格式：
+gitbook pdf ./ ./mybook.pdf
+
+#生成epub格式：
+gitbook epub ./ ./mybook.epub
+
+#生成 mobi 格式：
+gitbook mobi ./ ./mybook.mobi
+```
+
+
 
 ### 常用命令
 
