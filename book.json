@@ -3,6 +3,13 @@
     "author": "GG42",
     "description": "管窥蠡测，勿以为意。",
     "language": "zh-hans",
-	"plugins":["expandable-chapters"]
+	"plugins":["expandable-chapters","page-treeview","splitter"],
+    "pluginsConfig": {
+        "page-treeview": {
+            "copyright": "Copyright &#169; aleen42",
+            "minHeaderCount": "2",
+            "minHeaderDeep": "2"
+        }
+    }
 	
 }
