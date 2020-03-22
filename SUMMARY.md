@@ -15,6 +15,7 @@
     * 服务器
         * [Tomcat](Chapter2/Tomcat.md)
     * [微服务](Chapter2/微服务.md)
+        * [Docker](Chapter2/Docker.md)
     * 项目管理技术
     * 云
     * 加密
@@ -34,5 +35,4 @@
     * [Linux](Chapter6/Linux.md)
     * [Windows](Chapter6/Windows.md)
     * [虚拟机](Chapter6/虚拟机.md)
-    * [Docker](Chapter6/Docker.md)
 

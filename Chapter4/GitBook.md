@@ -2,14 +2,18 @@
 
 ------
 
-### 简介
+## 简介
 
 > 自定义的博客
 >
 > - [GitBook 官网](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.gitbook.com)
 > - [GitBook 文档](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FGitbookIO%2Fgitbook)
 
-### 准备工作
+------
+
+
+
+## 准备工作
 
 - 安装Node.js
 
@@ -19,7 +23,11 @@
   npm install gitbook-cli -g
   ```
 
-### 先睹为快
+------
+
+
+
+## 先睹为快
 
 - 进入一个需要写博客的目录
 
@@ -41,7 +49,91 @@
   gitbook serve --port 端口号
   ```
 
-### 构建书籍
+------
+
+
+
+## 安装插件
+
+- 在`book.json`文件中添加如下属性:
+
+  ```json
+  {
+      # 插件名
+      "plugins":["expandable-chapters","page-treeview","splitter"],
+  	# 插件配置
+      "pluginsConfig": {
+          "page-treeview": {
+              "copyright": "Copyright &#169; GG42",
+              "minHeaderCount": "2",
+              "minHeaderDeep": "2"
+          }
+      }
+  }
+  ```
+
+- 在`cmd`中输入以下命令,进行插件安装:
+
+  ```shell
+  # 插件安装
+  gitbook install
+  ```
+
+  **注意**:如果需要追加插件,不需要重复安装已经安装的插件,可用以下命令:
+
+  ```shell
+  # 指定安装插件
+  gitbook install 插件名
+  ```
+
+------
+
+
+
+## book.json 文件属性字段说明
+
+```json
+{
+    # web页面标签名
+    "title": "",
+    # 作者
+    "author": "GG42",
+    # 说明
+    "description": "管窥蠡测，勿以为意。",
+    # 页面使用什么语言
+    "language": "zh-hans",
+    # 插件
+	"plugins":["expandable-chapters","page-treeview","splitter"],
+	# 插件配置
+    "pluginsConfig": {
+        "page-treeview": {
+            "copyright": "Copyright &#169; GG42",
+            "minHeaderCount": "2",
+            "minHeaderDeep": "2"
+        }
+    },
+	# 左边导航栏外部连接,可不进行设置
+	"links" : {
+        "sidebar" : {
+            "github" : "https://github-gg42.github"
+        }
+	}
+	# 自定义样式文件,可使用默认配置
+	"styles": {
+        "website": "styles/website.css",
+        "ebook": "styles/ebook.css",
+        "pdf": "styles/pdf.css",
+        "mobi": "styles/mobi.css",
+        "epub": "styles/epub.css"
+	}
+}
+```
+
+------
+
+
+
+## 构建书籍
 
 ```shell
 #构建书籍：默认：将生成的静态网站输出到 _book 目录
@@ -60,9 +152,11 @@ gitbook epub ./ ./mybook.epub
 gitbook mobi ./ ./mybook.mobi
 ```
 
+------
 
 
-### 常用命令
+
+## 常用命令
 
 ```shell
     build [book] [output]       build a book
