@@ -139,7 +139,7 @@ curl -sSL https://get.daocloud.io/docker | sh
 执行后会自动下载并安装 Docker 及依赖包
 
 ```
-GG42@UbuntuBase:~$ curl -sSL https://get.daocloud.io/docker | sh
+GG42@Ubuntu:~$ curl -sSL https://get.daocloud.io/docker | sh
 # Executing docker install script, commit: 49ee7c1
 + sudo -E sh -c apt-get update -qq >/dev/null
 + sudo -E sh -c apt-get install -y -qq apt-transport-https ca-certificates curl software-properties-common >/dev/null
@@ -193,7 +193,7 @@ Remember that you will have to log out and back in for this to take effect!
 当要以非 root 用户可以直接运行 docker 时，需要执行 `sudo usermod -aG docker 某个用户` 命令，然后重新登陆，否则会有如下报错
 
 ```
-GG42@UbuntuBase:~$ docker run hello-world
+GG42@Ubuntu:~$ docker run hello-world
 docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.33/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
 See 'docker run --help'.
 ```
@@ -207,7 +207,7 @@ service docker start
 ### 查看 Docker 当前版本
 
 ```
-GG42@UbuntuBase:~$ docker version
+GG42@Ubuntu:~$ docker version
 Client:
  Version:      17.10.0-ce
  API version:  1.33
@@ -238,9 +238,196 @@ nano /lib/systemd/system/docker.service
 
 添加 `--registry-mirror=https://jxus37ac.mirror.aliyuncs.com` 到 ExecStart：
 
+![1584927913537](../img/1584927913537.png)
+
+修改为:
+
+![1584969438786](../img/1584969438786.png)
+
 保存配置：`systemctl daemon-reload`
 
 重启服务：`service docker restart`
+
+------
+
+
+
+## Docker 基本使用
+
+### Docker 应用程序
+
+> Docker 允许在容器内运行应用程序，使用 docker run 命令来在容器内运行一个应用程序。
+
+输出 Hello Docker:
+
+```shell
+GG42@Ubuntu:~$ docker run ubuntu:15.10 /bin/echo "Hello Docker"
+Hello Docker
+```
+
+参数解释：
+
+- docker：Docker 的二进制执行文件
+- run：与前面的 docker 组合来运行一个容器
+- ubuntu:15.10：指定要运行的镜像，Docker首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像
+- /bin/echo "Hello Docker"：在启动的容器里执行的命令
+
+以上命令完整的意思可以解释为：Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 bin/echo "Hello Docker"，然后输出结果。
+
+
+
+### 运行交互式的容器
+
+通过 docker 的两个参数 `-i` `-t`，让 docker 运行的容器实现"对话"的能力
+
+```
+GG42@Ubuntu:~$ docker run -it ubuntu:15.10 /bin/bash
+root@76ab065de67b:/#
+```
+
+参数解释：
+
+- `-t`：在新容器内指定一个伪终端或终端
+- `-i`：允许你对容器内的标准输入进行交互
+
+此时已进入一个 ubuntu15.10 系统的容器
+
+尝试在容器中运行命令 cat /proc/version 和 ls 分别查看当前系统的版本信息和当前目录下的文件列表
+
+```
+root@76ab065de67b:/# cat /proc/version
+Linux version 4.4.0-21-generic (buildd@lgw01-21) (gcc version 5.3.1 20160413 (Ubuntu 5.3.1-14ubuntu2) ) #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016
+root@76ab065de67b:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+```
+
+退出容器：
+
+- 运行 `exit`
+- 使用 `CTRL + D`
+
+
+
+### 以后台的方式运行容器
+
+使用以下命令创建一个以进程方式运行的容器
+
+```
+root@ubuntu:~# docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello docker; sleep 1; done"
+2ab101b86f8c95daf431cfa8ac84a21adf8dc13c1a8127aa43f421942ff7a219
+```
+
+在输出中，没有看到"hello docker"，而是一串长字符
+
+```
+2ab101b86f8c95daf431cfa8ac84a21adf8dc13c1a8127aa43f421942ff7a219
+```
+
+这个长字符串叫做容器ID，对每个容器来说都是唯一的，可以通过容器ID来查看对应的容器发生了什么。
+
+首先，需要确认容器有在运行，可以通过 `docker ps` 来查看
+
+```
+lusifer@UbuntuBase:~$ docker ps
+root@ubuntu:~# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS               NAMES
+2ab101b86f8c        ubuntu:15.10        "/bin/sh -c 'while t…"   About a minute ago   Up About a minute                       tender_shannon
+```
+
+CONTAINER ID：容器ID
+
+NAMES：自动分配的容器名称
+
+在容器内使用 `docker logs` 或 `docker -f logs `命令，查看容器内的标准输出
+
+```
+root@ubuntu:~# docker logs -f 2ab101b86f8c
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+hello docker
+```
+
+#### 与正在运行的容器交互
+
+```
+docker exec -it <container> /bin/bash
+```
+
+例如:
+
+```shell
+root@ubuntu:~# docker exec -it 2ab101b86f8c /bin/bash
+root@2ab101b86f8c:/# ll
+total 72
+drwxr-xr-x   1 root root 4096 Mar 23 13:48 ./
+drwxr-xr-x   1 root root 4096 Mar 23 13:48 ../
+-rwxr-xr-x   1 root root    0 Mar 23 13:48 .dockerenv*
+drwxr-xr-x   2 root root 4096 Jul  6  2016 bin/
+drwxr-xr-x   2 root root 4096 Oct 19  2015 boot/
+drwxr-xr-x   5 root root  340 Mar 23 13:48 dev/
+drwxr-xr-x   1 root root 4096 Mar 23 13:48 etc/
+```
+
+
+
+### 停止容器
+
+命令:`docker stop <container>` 
+
+```shell
+root@ubuntu:~# docker stop 2ab101b86f8
+2ab101b86f8
+
+root@ubuntu:~# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+
+------
+
+
+
+## Docker 容器管理
+
+### Docker 客户端
+
+
+
+### 运行 WEB 容器
+
+
+
+### 查看 WEB 容器
+
+
+
+### 查看 WEB 应用日志
+
+
+
+### 查看 WEB 应用容器的进程
+
+
+
+### 检查 WEB 应用程序
+
+
+
+### 重启 WEB 应用容器
+
+
+
+### 移除 WEB 应用容器
 
 ------
 
