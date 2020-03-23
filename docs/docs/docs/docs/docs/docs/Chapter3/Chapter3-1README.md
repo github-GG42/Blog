@@ -1,2 +1,0 @@
-# ArcGIS API for JavaScript
-
