@@ -1,11 +1,13 @@
 {
-    "title": "",
+    "title": "管窥蠡测，勿以为意",
     "author": "GG42",
     "description": "管窥蠡测，勿以为意。",
     "language": "zh-hans",
-	"plugins":["expandable-chapters","page-treeview","splitter","back-to-top-button","copy-code-button"],
+	"plugins":["-lunr","expandable-chapters","page-treeview","splitter","back-to-top-button","copy-code-button"],
     "pluginsConfig": {
-
+		"lunr": {
+            "maxIndexSize": 200000
+        }
     }
 	
 }
