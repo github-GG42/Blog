@@ -113,22 +113,24 @@ OpenSSH 服务器的主要配置文件为 `/etc/ssh/sshd\_config`，几乎所有
 
 ## 系统管理命令
 
-| 命令     | 说明                                                         |
-| :------- | :----------------------------------------------------------- |
-| stat     | 显示指定文件的相关信息,比ls命令显示内容更多                  |
-| who      | 显示在线登录用户                                             |
-| hostname | 显示主机名称                                                 |
-| uname    | 显示系统信息                                                 |
-| top      | 显示当前系统中耗费资源最多的进程                             |
-| ps       | 显示瞬间的进程状态, `ps -ef|grep xxx`:查看某进程详情         |
-| du       | 显示指定的文件（目录）已使用的磁盘空间的总量,加参数 `-h` 可查看更详细信息 |
-| df       | 显示文件系统磁盘空间的使用情况, `-h` 可查看更详细信息        |
-| free     | 显示当前内存和交换空间的使用情况, `-h` 可查看更详细信息      |
-| ifconfig | 显示网络接口信息                                             |
-| ping     | 测试网络的连通性                                             |
-| netstat  | 显示网络状态信息                                             |
-| clear    | 清屏                                                         |
-| kill     | 杀死一个进程, `kill -9 进程号`:绝对杀死某一进程              |
+| 命令      | 说明                                                         |
+| :-------- | :----------------------------------------------------------- |
+| stat      | 显示指定文件的相关信息,比ls命令显示内容更多                  |
+| who       | 显示在线登录用户                                             |
+| hostname  | 显示主机名称                                                 |
+| uname     | 显示系统信息                                                 |
+| top       | 显示当前系统中耗费资源最多的进程                             |
+| ps        | 显示瞬间的进程状态, `ps -ef|grep xxx`:查看某进程详情         |
+| du        | 显示指定的文件（目录）已使用的磁盘空间的总量,加参数 `-h` 可查看更详细信息 |
+| df        | 显示文件系统磁盘空间的使用情况, `-h` 可查看更详细信息        |
+| lvextend  | 磁盘空间扩容,(扩展逻辑卷空间)<br />`-L`：指定逻辑卷的大小，单位为“kKmMgGtT”字节；<br /> `-l`：指定逻辑卷的大小（LE数）。<br />例子:`lvextend +10G  /dev/mapper/ubuntu--vg-ubuntu--lv`    #增加10G空间<br />`lvextend 10G  /dev/mapper/ubuntu--vg-ubuntu--lv`    #调整为10G空间 |
+| resize2fs | 用来增大或者收缩未加载的“ext2/ext3/ext4”文件系统的大小,调整逻辑卷文件系统大小.(与lvextend配合使用)<br />`-d`:打开调试特性<br />`-p`:打印已经完成的百分比进度条<br />`-f`:强制执行调整大小操作,覆盖掉安全检查操作<br />`-F`:开始执行调整大小前,刷新文件系统设备的缓冲区<br />例子:`resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv` # 调整逻辑卷文件系统大小 |
+| free      | 显示当前内存和交换空间的使用情况, `-h` 可查看更详细信息      |
+| ifconfig  | 显示网络接口信息                                             |
+| ping      | 测试网络的连通性                                             |
+| netstat   | 显示网络状态信息                                             |
+| clear     | 清屏                                                         |
+| kill      | 杀死一个进程, `kill -9 进程号`:绝对杀死某一进程              |
 
 ------
 
@@ -256,6 +258,20 @@ nano 是一个字符终端的文本编辑器，有点像 DOS 下的 editor 程�
 
 
 
+## Linux 网络管理
+
+### 重启网络配置
+
+```shell
+netplan apply
+```
+
+
+
+------
+
+
+
 ## Linux 软件包管理
 
 >  APT(Advanced Packaging Tool) 是 Debian/Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 `/etc/apt/` 目录下的 `sources.list` 文件。
@@ -313,9 +329,10 @@ apt-get install packagename
 
 #### 删除软件包
 
-```
-apt-get remove packagename
-apt-get autoremove packagename
+```shell
+apt-get remove <packagename>
+apt-get autoremove <packagename>
+apt-get --purge remove <programname>
 ```
 
 #### 更新软件包列表
