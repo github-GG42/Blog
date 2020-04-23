@@ -1207,11 +1207,10 @@ MAINTAINER <name>
   # 例如：
   ```
 ##### RUN ["./test.php", "dev", "offline"] 等价于 RUN ./test.php dev offline
-  ```
 
 **注意**：Dockerfile 的指令每执行一次都会在 docker 上新建一层。所以过多无意义的层，会造成镜像膨胀过大。例如：
 
-​```dockerfile
+  ```dockerfile
 FROM centos
 RUN yum install wget
 RUN wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz"
