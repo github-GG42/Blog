@@ -1750,43 +1750,37 @@ root@40b57362c181:/#
 </span><span class="hljs-comment"># &#x4F8B;&#x5982;&#xFF1A;</span>
 </code></pre>
 <h5 id="run-testphp-dev-offline-&#x7B49;&#x4EF7;&#x4E8E;-run-testphp-dev-offline">RUN [&quot;./test.php&quot;, &quot;dev&quot;, &quot;offline&quot;] &#x7B49;&#x4EF7;&#x4E8E; RUN ./test.php dev offline</h5>
-<p>```</p>
 </li>
 </ul>
 <p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;Dockerfile &#x7684;&#x6307;&#x4EE4;&#x6BCF;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x90FD;&#x4F1A;&#x5728; docker &#x4E0A;&#x65B0;&#x5EFA;&#x4E00;&#x5C42;&#x3002;&#x6240;&#x4EE5;&#x8FC7;&#x591A;&#x65E0;&#x610F;&#x4E49;&#x7684;&#x5C42;&#xFF0C;&#x4F1A;&#x9020;&#x6210;&#x955C;&#x50CF;&#x81A8;&#x80C0;&#x8FC7;&#x5927;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
-<p>&#x200B;```dockerfile
-FROM centos
-RUN yum install wget
-RUN wget -O redis.tar.gz &quot;<a href="http://download.redis.io/releases/redis-5.0.3.tar.gz" target="_blank">http://download.redis.io/releases/redis-5.0.3.tar.gz</a>&quot;
-RUN tar -xvf redis.tar.gz</p>
-<h1 id="&#x4EE5;&#x4E0A;&#x6267;&#x884C;&#x4F1A;&#x521B;&#x5EFA;-3-&#x5C42;&#x955C;&#x50CF;&#x3002;&#x53EF;&#x7B80;&#x5316;&#x4E3A;&#x4EE5;&#x4E0B;&#x683C;&#x5F0F;&#xFF1A;">&#x4EE5;&#x4E0A;&#x6267;&#x884C;&#x4F1A;&#x521B;&#x5EFA; 3 &#x5C42;&#x955C;&#x50CF;&#x3002;&#x53EF;&#x7B80;&#x5316;&#x4E3A;&#x4EE5;&#x4E0B;&#x683C;&#x5F0F;&#xFF1A;</h1>
-<p>FROM centos
-RUN yum install wget 
-    &amp;&amp; wget -O redis.tar.gz &quot;<a href="http://download.redis.io/releases/redis-5.0.3.tar.gz" target="_blank">http://download.redis.io/releases/redis-5.0.3.tar.gz</a>&quot; 
-    &amp;&amp; tar -xvf redis.tar.gz</p>
-<pre><code>
-&#x5982;&#x4E0A;&#xFF0C;&#x4EE5; **&amp;&amp;** &#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#x547D;&#x4EE4;&#xFF0C;&#x8FD9;&#x6837;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x53EA;&#x4F1A;&#x521B;&#x5EFA; 1 &#x5C42;&#x955C;&#x50CF;&#x3002;
-
-##### CMD
-
-&#x7C7B;&#x4F3C;&#x4E8E; RUN &#x6307;&#x4EE4;&#xFF0C;&#x7528;&#x4E8E;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x4F46;&#x4E8C;&#x8005;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x95F4;&#x70B9;&#x4E0D;&#x540C;:
-
-- CMD &#x5728;docker run &#x65F6;&#x8FD0;&#x884C;&#x3002;
-- RUN &#x662F;&#x5728; docker build&#x3002;
-
-**&#x4F5C;&#x7528;**&#xFF1A;&#x4E3A;&#x542F;&#x52A8;&#x7684;&#x5BB9;&#x5668;&#x6307;&#x5B9A;&#x9ED8;&#x8BA4;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x7ED3;&#x675F;&#xFF0C;&#x5BB9;&#x5668;&#x4E5F;&#x5C31;&#x7ED3;&#x675F;&#x3002;CMD &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x53EF;&#x88AB; docker run &#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x4E2D;&#x6307;&#x5B9A;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#x6240;&#x8986;&#x76D6;&#x3002;
-
-**&#x6CE8;&#x610F;**&#xFF1A;&#x5982;&#x679C; Dockerfile &#x4E2D;&#x5982;&#x679C;&#x5B58;&#x5728;&#x591A;&#x4E2A; CMD &#x6307;&#x4EE4;&#xFF0C;&#x4EC5;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x751F;&#x6548;&#x3002;
-
-&#x683C;&#x5F0F;&#xFF1A;
-
-```dockerfile
-CMD &lt;shell &#x547D;&#x4EE4;&gt; 
-CMD [&quot;&lt;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x6216;&#x547D;&#x4EE4;&gt;&quot;,&quot;&lt;param1&gt;&quot;,&quot;&lt;param2&gt;&quot;,...] 
-
-# &#x8BE5;&#x5199;&#x6CD5;&#x662F;&#x4E3A; ENTRYPOINT &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x63D0;&#x4F9B;&#x9ED8;&#x8BA4;&#x53C2;&#x6570;
-CMD [&quot;&lt;param1&gt;&quot;,&quot;&lt;param2&gt;&quot;,...]
-</code></pre><p><strong>&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x7B2C;&#x4E8C;&#x79CD;&#x683C;&#x5F0F;</strong>&#xFF0C;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x6BD4;&#x8F83;&#x660E;&#x786E;&#x3002;&#x7B2C;&#x4E00;&#x79CD;&#x683C;&#x5F0F;&#x5B9E;&#x9645;&#x4E0A;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x4E5F;&#x4F1A;&#x81EA;&#x52A8;&#x8F6C;&#x6362;&#x6210;&#x7B2C;&#x4E8C;&#x79CD;&#x683C;&#x5F0F;&#x8FD0;&#x884C;&#xFF0C;&#x5E76;&#x4E14;&#x9ED8;&#x8BA4;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x662F; sh&#x3002;</p>
+<pre><code class="lang-dockerfile"><span class="hljs-keyword">FROM</span> centos
+<span class="hljs-keyword">RUN</span> <span class="bash">yum install wget
+</span><span class="hljs-keyword">RUN</span> <span class="bash">wget -O redis.tar.gz <span class="hljs-string">&quot;http://download.redis.io/releases/redis-5.0.3.tar.gz&quot;</span>
+</span><span class="hljs-keyword">RUN</span> <span class="bash">tar -xvf redis.tar.gz
+</span>
+<span class="hljs-comment"># &#x4EE5;&#x4E0A;&#x6267;&#x884C;&#x4F1A;&#x521B;&#x5EFA; 3 &#x5C42;&#x955C;&#x50CF;&#x3002;&#x53EF;&#x7B80;&#x5316;&#x4E3A;&#x4EE5;&#x4E0B;&#x683C;&#x5F0F;&#xFF1A;</span>
+<span class="hljs-keyword">FROM</span> centos
+<span class="hljs-keyword">RUN</span> <span class="bash">yum install wget 
+</span>    &amp;&amp; wget -O redis.tar.gz &quot;http://download.redis.io/releases/redis-5.0.3.tar.gz&quot; 
+    &amp;&amp; tar -xvf redis.tar.gz
+</code></pre>
+<p>&#x5982;&#x4E0A;&#xFF0C;&#x4EE5; <strong>&amp;&amp;</strong> &#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#x547D;&#x4EE4;&#xFF0C;&#x8FD9;&#x6837;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x53EA;&#x4F1A;&#x521B;&#x5EFA; 1 &#x5C42;&#x955C;&#x50CF;&#x3002;</p>
+<h5 id="cmd">CMD</h5>
+<p>&#x7C7B;&#x4F3C;&#x4E8E; RUN &#x6307;&#x4EE4;&#xFF0C;&#x7528;&#x4E8E;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x4F46;&#x4E8C;&#x8005;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x95F4;&#x70B9;&#x4E0D;&#x540C;:</p>
+<ul>
+<li>CMD &#x5728;docker run &#x65F6;&#x8FD0;&#x884C;&#x3002;</li>
+<li>RUN &#x662F;&#x5728; docker build&#x3002;</li>
+</ul>
+<p><strong>&#x4F5C;&#x7528;</strong>&#xFF1A;&#x4E3A;&#x542F;&#x52A8;&#x7684;&#x5BB9;&#x5668;&#x6307;&#x5B9A;&#x9ED8;&#x8BA4;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x7ED3;&#x675F;&#xFF0C;&#x5BB9;&#x5668;&#x4E5F;&#x5C31;&#x7ED3;&#x675F;&#x3002;CMD &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x53EF;&#x88AB; docker run &#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x4E2D;&#x6307;&#x5B9A;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#x6240;&#x8986;&#x76D6;&#x3002;</p>
+<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x5982;&#x679C; Dockerfile &#x4E2D;&#x5982;&#x679C;&#x5B58;&#x5728;&#x591A;&#x4E2A; CMD &#x6307;&#x4EE4;&#xFF0C;&#x4EC5;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x751F;&#x6548;&#x3002;</p>
+<p>&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code class="lang-dockerfile"><span class="hljs-keyword">CMD</span> <span class="bash">&lt;shell &#x547D;&#x4EE4;&gt; 
+</span><span class="hljs-keyword">CMD</span> <span class="bash">[<span class="hljs-string">&quot;&lt;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x6216;&#x547D;&#x4EE4;&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param1&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param2&gt;&quot;</span>,...] 
+</span>
+<span class="hljs-comment"># &#x8BE5;&#x5199;&#x6CD5;&#x662F;&#x4E3A; ENTRYPOINT &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x63D0;&#x4F9B;&#x9ED8;&#x8BA4;&#x53C2;&#x6570;</span>
+<span class="hljs-keyword">CMD</span> <span class="bash">[<span class="hljs-string">&quot;&lt;param1&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param2&gt;&quot;</span>,...]
+</span></code></pre>
+<p><strong>&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x7B2C;&#x4E8C;&#x79CD;&#x683C;&#x5F0F;</strong>&#xFF0C;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x6BD4;&#x8F83;&#x660E;&#x786E;&#x3002;&#x7B2C;&#x4E00;&#x79CD;&#x683C;&#x5F0F;&#x5B9E;&#x9645;&#x4E0A;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x4E5F;&#x4F1A;&#x81EA;&#x52A8;&#x8F6C;&#x6362;&#x6210;&#x7B2C;&#x4E8C;&#x79CD;&#x683C;&#x5F0F;&#x8FD0;&#x884C;&#xFF0C;&#x5E76;&#x4E14;&#x9ED8;&#x8BA4;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x662F; sh&#x3002;</p>
 <h5 id="entrypoint">ENTRYPOINT</h5>
 <p>&#x7C7B;&#x4F3C;&#x4E8E; CMD &#x6307;&#x4EE4;&#xFF0C;&#x4F46;&#x5176;<strong>&#x4E0D;&#x4F1A;&#x88AB; docker run &#x7684;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x6307;&#x4EE4;&#x6240;&#x8986;&#x76D6;</strong>&#xFF0C;&#x800C;&#x4E14;<strong>&#x8FD9;&#x4E9B;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x4F1A;&#x88AB;&#x5F53;&#x4F5C;&#x53C2;&#x6570;&#x9001;&#x7ED9; ENTRYPOINT &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;</strong>&#x3002;</p>
 <p>&#x4F46;&#x662F;, <strong>&#x5982;&#x679C;&#x8FD0;&#x884C; docker run &#x65F6;&#x4F7F;&#x7528;&#x4E86; --entrypoint &#x9009;&#x9879;&#xFF0C;&#x6B64;&#x9009;&#x9879;&#x7684;&#x53C2;&#x6570;&#x53EF;&#x5F53;&#x4F5C;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#x8986;&#x76D6; ENTRYPOINT &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;</strong>&#x3002;</p>
@@ -2209,7 +2203,7 @@ strapi/strapi
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Docker","level":"1.3.3.1","depth":3,"next":{"title":"项目管理技术","level":"1.3.4","depth":2,"ref":"","articles":[]},"previous":{"title":"微服务","level":"1.3.3","depth":2,"path":"Chapter2/微服务.md","ref":"Chapter2/微服务.md","articles":[{"title":"Docker","level":"1.3.3.1","depth":3,"path":"Chapter2/Docker.md","ref":"Chapter2/Docker.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","expandable-chapters","page-treeview","splitter","back-to-top-button","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-treeview":{"copyright":"Copyright © aleen42","minHeaderCount":"1","minHeaderDeep":"1"},"splitter":{},"search":{},"lunr":{"maxIndexSize":200000},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"GG42","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"管窥蠡测，勿以为意","language":"zh-hans","gitbook":"*","description":"管窥蠡测，勿以为意。"},"file":{"path":"Chapter2/Docker.md","mtime":"2020-04-02T14:12:57.792Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-13T04:51:21.933Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Docker","level":"1.3.3.1","depth":3,"next":{"title":"项目管理技术","level":"1.3.4","depth":2,"ref":"","articles":[]},"previous":{"title":"微服务","level":"1.3.3","depth":2,"path":"Chapter2/微服务.md","ref":"Chapter2/微服务.md","articles":[{"title":"Docker","level":"1.3.3.1","depth":3,"path":"Chapter2/Docker.md","ref":"Chapter2/Docker.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","expandable-chapters","page-treeview","splitter","back-to-top-button","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-treeview":{"copyright":"Copyright © aleen42","minHeaderCount":"1","minHeaderDeep":"1"},"splitter":{},"search":{},"lunr":{"maxIndexSize":200000},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"GG42","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"管窥蠡测，勿以为意","language":"zh-hans","gitbook":"*","description":"管窥蠡测，勿以为意。"},"file":{"path":"Chapter2/Docker.md","mtime":"2020-04-23T10:08:20.621Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-23T10:13:23.208Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
