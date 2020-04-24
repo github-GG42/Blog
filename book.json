@@ -3,10 +3,23 @@
     "author": "GG42",
     "description": "管窥蠡测，勿以为意。",
     "language": "zh-hans",
-	"plugins":["-lunr","expandable-chapters","page-treeview","splitter","back-to-top-button","copy-code-button"],
+	"plugins":["-lunr", "-search", "search-pro","code","expandable-chapters","page-treeview","popup",
+	"hide-element","pageview-count","splitter","back-to-top-button","page-toc-button","tbfed-pagefooter"],
     "pluginsConfig": {
 		"lunr": {
             "maxIndexSize": 200000
+        },
+		"page-toc-button": {
+            "maxTocDepth": 5,
+            "minTocSize": 5
+        },
+		"hide-element": {
+            "elements": [".gitbook-link"]
+        },
+		"tbfed-pagefooter": {
+            "copyright":"Copyright &copy gg42.top 2020",
+            "modify_label": "该文件修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
         }
     }
 	

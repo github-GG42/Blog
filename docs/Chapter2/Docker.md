@@ -86,7 +86,9 @@ Docker提供用于在隔离环境中运行应用程序的容器。 每个容器�
 | 容器   | 对象     |
 | 镜像   | 类       |
 
-**架构图:**![1584885941892](../img/1584885941892.png)
+**架构图:**
+
+![1584885941892](../img/1584885941892.png)
 
 **说明:**
 
@@ -1205,8 +1207,10 @@ MAINTAINER <name>
   ```dockerfile
   RUN ["可执行文件", "参数1", "参数2"]
   # 例如：
+  RUN ["./test.php", "dev", "offline"] 
+  # 等价于 
+  RUN ./test.php dev offline
   ```
-##### RUN ["./test.php", "dev", "offline"] 等价于 RUN ./test.php dev offline
 
 **注意**：Dockerfile 的指令每执行一次都会在 docker 上新建一层。所以过多无意义的层，会造成镜像膨胀过大。例如：
 
@@ -1216,12 +1220,16 @@ RUN yum install wget
 RUN wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz"
 RUN tar -xvf redis.tar.gz
 
-# 以上执行会创建 3 层镜像。可简化为以下格式：
+  ```
+
+以上执行会创建 3 层镜像。可简化为以下格式：
+
+```dockerfile
 FROM centos
 RUN yum install wget 
     && wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz" 
     && tar -xvf redis.tar.gz
-  ```
+```
 
 如上，以 **&&** 符号连接命令，这样执行后，只会创建 1 层镜像。
 
@@ -1242,7 +1250,7 @@ RUN yum install wget
 CMD <shell 命令> 
 CMD ["<可执行文件或命令>","<param1>","<param2>",...] 
 
-# 该写法是为 ENTRYPOINT 指令指定的程序提供默认参数
+#该写法是为 ENTRYPOINT 指令指定的程序提供默认参数
 CMD ["<param1>","<param2>",...]  
 ```
 
